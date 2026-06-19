@@ -331,6 +331,16 @@
     }
     document.getElementById('addCartBtn').textContent = 'Add to Cart — ' + window.HWL.money(product.price);
     document.title = product.name + ' — Personalized Wedding Décor | HoneyWoodLand';
+
+    /* real photo -> main gallery image + thumbnails (fallback: keep current) */
+    if (product.img) {
+      mainImg.style.backgroundImage = "url('" + product.img + "')";
+      mainImg.setAttribute('aria-label', product.name);
+      thumbs.querySelectorAll('.th').forEach(function (t) {
+        t.style.backgroundImage = "url('" + product.img + "')";
+        t.dataset.img = product.img;
+      });
+    }
   }
 
   /* ---------- add to cart (shared handler from site.js) ---------- */

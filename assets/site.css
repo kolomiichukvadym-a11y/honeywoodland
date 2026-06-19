@@ -155,3 +155,7 @@ footer{background:var(--charcoal);color:var(--ivory)}
 .card .imgbox .ph .ph-logo{font-family:var(--serif);font-size:18px;font-weight:600;letter-spacing:.02em;color:rgba(156,125,68,.85)}
 .card .imgbox .ph .ph-mat{position:absolute;bottom:12px;left:12px;font-family:var(--sans);font-size:10px;
   font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(43,43,43,.4)}
+/* real product photo fills the same card image area */
+.card .imgbox .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.card:hover .imgbox .ph-img{transform:scale(1.04)}

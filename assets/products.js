@@ -5,14 +5,14 @@
    ============================================================ */
 window.HWL_PRODUCTS = [
   // PLACE CARDS
-  { id:"wood-place-card", cat:"place-cards", name:"Wooden Laser-Cut Place Card", material:"Wood", price:2.30, compareAt:3.10, badge:"Bestseller" },
+  { id:"wood-place-card", cat:"place-cards", name:"Wooden Laser-Cut Place Card", material:"Wood", price:2.30, compareAt:3.10, badge:"Bestseller", img:"https://i.etsystatic.com/40112780/r/il/3b118d/5245438681/il_794xN.5245438681_sdg7.jpg" },
   { id:"gold-mirror-place-card", cat:"place-cards", name:"Gold Mirror Acrylic Place Card", material:"Acrylic", price:1.70, compareAt:2.30, badge:"" },
   { id:"copper-mirror-place-card", cat:"place-cards", name:"Copper Mirror Acrylic Place Card", material:"Acrylic", price:1.70, compareAt:2.30, badge:"" },
   { id:"initials-place-card", cat:"place-cards", name:"Custom Initial Place Card", material:"Wood", price:2.30, compareAt:3.10, badge:"" },
   { id:"napkin-ring-name", cat:"place-cards", name:"Personalized Wooden Napkin Ring + Name", material:"Wood", price:3.40, compareAt:4.50, badge:"" },
   { id:"heart-name-tag", cat:"place-cards", name:"Wooden Heart Name Tag", material:"Wood", price:0.90, compareAt:1.20, badge:"" },
   // TABLE NUMBERS
-  { id:"acrylic-gold-mirror-numbers", cat:"table-numbers", name:"Acrylic Clear & Gold Mirror Table Numbers", material:"Acrylic", price:8.90, compareAt:11.90, badge:"Bestseller" },
+  { id:"acrylic-gold-mirror-numbers", cat:"table-numbers", name:"Acrylic Clear & Gold Mirror Table Numbers", material:"Acrylic", price:8.90, compareAt:11.90, badge:"Bestseller", img:"https://i.etsystatic.com/40112780/r/il/78d6a3/6577983810/il_794xN.6577983810_oi4h.jpg" },
   { id:"gold-mirror-numbers", cat:"table-numbers", name:"Gold Mirror Acrylic Table Numbers", material:"Acrylic", price:4.60, compareAt:6.10, badge:"" },
   { id:"silver-mirror-numbers", cat:"table-numbers", name:"Silver Mirror Acrylic Table Numbers", material:"Acrylic", price:4.60, compareAt:6.10, badge:"" },
   { id:"rose-gold-numbers", cat:"table-numbers", name:"Rose Gold Mirror Table Numbers w/ Stand", material:"Acrylic", price:4.60, compareAt:6.10, badge:"" },
@@ -24,12 +24,12 @@ window.HWL_PRODUCTS = [
   { id:"red-matte-numbers", cat:"table-numbers", name:"Red Matte Wooden Table Numbers", material:"Wood", price:10.70, compareAt:14.30, badge:"" },
   { id:"table-names-city", cat:"table-numbers", name:"Custom City / Word Table Names", material:"Wood", price:11.80, compareAt:15.70, badge:"" },
   // CAKE TOPPERS
-  { id:"rustic-cake-topper", cat:"cake-toppers", name:"Rustic Mr & Mrs Wooden Cake Topper", material:"Wood", price:33.50, compareAt:44.70, badge:"Bestseller" },
+  { id:"rustic-cake-topper", cat:"cake-toppers", name:"Rustic Mr & Mrs Wooden Cake Topper", material:"Wood", price:33.50, compareAt:44.70, badge:"Bestseller", img:"https://i.etsystatic.com/40112780/r/il/4da4dc/4946759521/il_794xN.4946759521_7cro.jpg" },
   { id:"mirror-cake-topper", cat:"cake-toppers", name:"Personalized Mirror Acrylic Cake Topper", material:"Acrylic", price:31.50, compareAt:42.10, badge:"" },
   { id:"initial-cake-topper", cat:"cake-toppers", name:"Elegant Initial Cake Topper", material:"Wood", price:33.50, compareAt:44.70, badge:"" },
   { id:"birthday-cake-topper", cat:"cake-toppers", name:"Custom Birthday Cake Topper", material:"Wood", price:33.50, compareAt:44.70, badge:"" },
   // SIGNS
-  { id:"mr-mrs-chair-signs", cat:"signs", name:"Mr & Mrs Wedding Chair Signs", material:"Wood", price:40.00, compareAt:53.80, badge:"Bestseller" },
+  { id:"mr-mrs-chair-signs", cat:"signs", name:"Mr & Mrs Wedding Chair Signs", material:"Wood", price:40.00, compareAt:53.80, badge:"Bestseller", img:"https://i.etsystatic.com/40112780/r/il/202dd6/7753355989/il_794xN.7753355989_e70q.jpg" },
   { id:"bride-to-be-chair", cat:"signs", name:"Bride To Be Chair Sign", material:"Wood", price:40.00, compareAt:53.80, badge:"" },
   { id:"front-door-sign", cat:"signs", name:"Personalized Wooden Front Door Sign", material:"Wood", price:22.50, compareAt:30.00, badge:"" },
   { id:"wc-door-sign", cat:"signs", name:"WC / Bathroom Laser-Cut Door Sign", material:"Wood", price:27.50, compareAt:36.80, badge:"" },
@@ -39,10 +39,10 @@ window.HWL_PRODUCTS = [
   // DRINK ACCESSORIES
   { id:"wine-glass-charms", cat:"drink-accessories", name:"Personalized Wine Glass Charms", material:"Acrylic", price:1.95, compareAt:2.60, badge:"" },
   { id:"butterfly-charm", cat:"drink-accessories", name:"Butterfly Wine Glass Charm", material:"Acrylic", price:1.95, compareAt:2.60, badge:"" },
-  { id:"drink-stirrers", cat:"drink-accessories", name:"Personalized Drink Stirrers", material:"Acrylic", price:1.95, compareAt:2.60, badge:"" },
+  { id:"drink-stirrers", cat:"drink-accessories", name:"Personalized Drink Stirrers", material:"Acrylic", price:1.95, compareAt:2.60, badge:"", img:"https://i.etsystatic.com/40112780/r/il/96eb76/7629382438/il_794xN.7629382438_ld5o.jpg" },
   { id:"couple-coasters", cat:"drink-accessories", name:"Personalized Couple Coaster Set", material:"Wood", price:26.00, compareAt:34.60, badge:"" },
   // CHRISTMAS
-  { id:"christmas-bauble", cat:"christmas", name:"Personalized Christmas Bauble", material:"Wood", price:8.90, compareAt:11.90, badge:"" },
+  { id:"christmas-bauble", cat:"christmas", name:"Personalized Christmas Bauble", material:"Wood", price:8.90, compareAt:11.90, badge:"", img:"https://i.etsystatic.com/40112780/r/il/6b4f3f/7238540930/il_794xN.7238540930_41qm.jpg" },
   { id:"christmas-ornament-logo", cat:"christmas", name:"Custom Logo Christmas Ornament", material:"Wood", price:10.70, compareAt:14.30, badge:"" },
   { id:"christmas-3d-bauble", cat:"christmas", name:"3D Christmas Tree Bauble w/ Name", material:"Wood", price:15.50, compareAt:20.70, badge:"" },
   { id:"stocking-tags", cat:"christmas", name:"Christmas Wood Stocking Tags", material:"Wood", price:7.10, compareAt:9.50, badge:"" },
@@ -50,7 +50,7 @@ window.HWL_PRODUCTS = [
   // SEASONAL
   { id:"thanksgiving-place-cards", cat:"seasonal", name:"Thanksgiving Leaf Place Cards", material:"Wood", price:4.60, compareAt:6.10, badge:"" },
   { id:"turkey-place-cards", cat:"seasonal", name:"Turkey Thanksgiving Place Cards", material:"Wood", price:6.90, compareAt:9.20, badge:"" },
-  { id:"easter-bunny-tag", cat:"seasonal", name:"Easter Basket Bunny Name Tag", material:"Acrylic", price:6.20, compareAt:8.30, badge:"" },
+  { id:"easter-bunny-tag", cat:"seasonal", name:"Easter Basket Bunny Name Tag", material:"Acrylic", price:6.20, compareAt:8.30, badge:"", img:"https://i.etsystatic.com/40112780/r/il/0b1d2d/6704329848/il_794xN.6704329848_rhla.jpg" },
   { id:"eid-decorations", cat:"seasonal", name:"Eid Mubarak Laser-Cut Decorations", material:"Wood", price:6.20, compareAt:8.30, badge:"" }
 ];
 
@@ -65,13 +65,16 @@ window.HWL_PRODUCTS = [
       ? '<span class="badge ' + (p.badge === 'Bestseller' ? 'badge-best' : 'badge-new') + '">' + esc(p.badge) + '</span>'
       : '';
     var old = p.compareAt ? '<span class="old">' + money(p.compareAt) + '</span>' : '';
+    var art = p.img
+      ? '<img class="ph-img" src="' + esc(p.img) + '" loading="lazy" alt="' + esc(p.name) + '" />'
+      : '<div class="ph ' + mat + '" role="img" aria-label="' + esc(p.name) + '">' +
+          '<span class="ph-mat">' + esc(p.material) + '</span>' +
+          '<span class="ph-logo">HoneyWoodLand</span>' +
+        '</div>';
     return '<a class="card" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
       '<div class="imgbox">' + badge +
         '<span class="fav" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5 6 5c2 0 3.2 1.3 4 2.5C10.8 6.3 12 5 14 5c3.5 0 5 4 3.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></span>' +
-        '<div class="ph ' + mat + '" role="img" aria-label="' + esc(p.name) + '">' +
-          '<span class="ph-mat">' + esc(p.material) + '</span>' +
-          '<span class="ph-logo">HoneyWoodLand</span>' +
-        '</div>' +
+        art +
       '</div>' +
       '<div class="info">' +
         '<h3>' + esc(p.name) + '</h3>' +
