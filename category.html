@@ -122,11 +122,11 @@
 <header id="site-header"></header>
 
 <!-- CATEGORY HERO -->
-<section class="cat-hero" aria-label="Wedding Collection" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=2000&q=80')">
+<section class="cat-hero" id="catHero" aria-label="Shop" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=2000&q=80')">
   <div class="ov"></div>
   <div class="c">
-    <p class="overline" style="color:var(--gold)">The Wedding Collection</p>
-    <h1>Wedding Collection</h1>
+    <p class="overline" style="color:var(--gold)" id="catOverline">The HoneyWoodLand Collection</p>
+    <h1 id="catTitle">Shop All</h1>
   </div>
 </section>
 
@@ -134,8 +134,8 @@
   <!-- BREADCRUMB -->
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <a href="index.html">Home</a><span class="sep">/</span>
-    <a href="category.html">Shop</a><span class="sep">/</span>
-    <span class="cur">Wedding Collection</span>
+    <a href="category.html">Shop</a><span class="sep" id="catCrumbSep">/</span>
+    <span class="cur" id="catCrumb">All</span>
   </nav>
 
   <!-- STYLE CHIPS + COUNT -->
@@ -190,10 +190,38 @@
   var grid = document.getElementById('catProds');
   var activeMaterials = {}; /* e.g. {Wood:true, Acrylic:true} — empty = show all */
 
+  /* cat -> human name */
+  var CAT_NAMES = {
+    'place-cards': 'Place Cards',
+    'table-numbers': 'Table Numbers',
+    'cake-toppers': 'Cake Toppers',
+    'signs': 'Signs',
+    'drink-accessories': 'Drink Accessories',
+    'christmas': 'Christmas',
+    'seasonal': 'Seasonal'
+  };
+
+  /* read ?cat= and validate against the catalog */
+  var catParam = new URLSearchParams(location.search).get('cat');
+  var activeCat = (catParam && CAT_NAMES[catParam]) ? catParam : null;
+
+  /* products restricted to the chosen category (or all) */
+  var inCategory = activeCat ? catalog.filter(function (p) { return p.cat === activeCat; }) : catalog;
+
+  /* heading / breadcrumb / title reflect the chosen category */
+  (function applyCategoryLabels() {
+    var name = activeCat ? CAT_NAMES[activeCat] : 'Shop All';
+    document.getElementById('catTitle').textContent = name;
+    document.getElementById('catHero').setAttribute('aria-label', name);
+    document.getElementById('catOverline').textContent = activeCat ? 'The HoneyWoodLand Collection' : 'Everything we make';
+    document.getElementById('catCrumb').textContent = name;
+    document.title = name + ' — Personalized Wedding & Event Décor | HoneyWoodLand';
+  })();
+
   function visibleProducts() {
     var mats = Object.keys(activeMaterials).filter(function (k) { return activeMaterials[k]; });
-    if (!mats.length) return catalog;
-    return catalog.filter(function (p) { return activeMaterials[p.material]; });
+    if (!mats.length) return inCategory;
+    return inCategory.filter(function (p) { return activeMaterials[p.material]; });
   }
 
   function renderGrid() {
