@@ -68,6 +68,7 @@
 
 <!-- Shared chrome -->
 <link rel="stylesheet" href="assets/site.css" />
+<script src="assets/products.js"></script>
 <script defer src="assets/site.js"></script>
 
 <style>
@@ -175,7 +176,7 @@
     <a href="index.html">Home</a><span class="sep">/</span>
     <a href="category.html">Shop</a><span class="sep">/</span>
     <a href="category.html">Wedding Collection</a><span class="sep">/</span>
-    <span class="cur">Gold-Edge Acrylic Table Numbers</span>
+    <span class="cur" id="pCrumb">Gold-Edge Acrylic Table Numbers</span>
   </nav>
 
   <!-- PRODUCT -->
@@ -194,9 +195,9 @@
     </div>
 
     <div class="buy">
-      <h1>Gold-Edge Acrylic Table Numbers</h1>
+      <h1 id="pName">Gold-Edge Acrylic Table Numbers</h1>
       <div class="rate"><span class="s">★</span> 4.8 <span class="lk">(318 reviews)</span></div>
-      <div class="price"><span class="now">$48</span><span class="old">$60</span><span class="save">Save 20%</span></div>
+      <div class="price"><span class="now" id="pNow">$48</span><span class="old" id="pOld">$60</span><span class="save" id="pSave">Save 20%</span></div>
 
       <div class="opt">
         <div class="lab">Material — <span id="matName">Acrylic</span></div>
@@ -310,42 +311,41 @@
   pInput.addEventListener('input', updatePrev);
   updatePrev();
 
+  /* ---------- load product from catalog by ?id (fallback: first item) ---------- */
+  var params = new URLSearchParams(location.search);
+  var product = (window.HWL && window.HWL.byId(params.get('id'))) ||
+                (window.HWL_PRODUCTS && window.HWL_PRODUCTS[0]) || null;
+  if (product) {
+    document.getElementById('pName').textContent = product.name;
+    document.getElementById('pCrumb').textContent = product.name;
+    document.getElementById('pNow').textContent = window.HWL.money(product.price);
+    var oldEl = document.getElementById('pOld'), saveEl = document.getElementById('pSave');
+    if (product.compareAt && product.compareAt > product.price) {
+      oldEl.textContent = window.HWL.money(product.compareAt);
+      oldEl.style.display = '';
+      saveEl.textContent = 'Save ' + Math.round((1 - product.price / product.compareAt) * 100) + '%';
+      saveEl.style.display = '';
+    } else {
+      oldEl.style.display = 'none';
+      saveEl.style.display = 'none';
+    }
+    document.getElementById('addCartBtn').textContent = 'Add to Cart — ' + window.HWL.money(product.price);
+    document.title = product.name + ' — Personalized Wedding Décor | HoneyWoodLand';
+  }
+
   /* ---------- add to cart (shared handler from site.js) ---------- */
   document.getElementById('addCartBtn').addEventListener('click', function (e) {
     e.preventDefault();
     window.addToCart(1);
   });
 
-  /* ---------- you may also like ---------- */
-  var U = function (id, w) {
-    return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + (w || 600) + '&q=80';
-  };
-  var related = [
-    {t:"Wooden Place Names",m:"Oak · Walnut · Birch",p:"$4.50",r:"4.9",rv:"532",b:"best",i:"1464366400600-7168b8af9bc3",h:"1511285560929-80b456fea0bc"},
-    {t:"Mirror Acrylic Seating Chart",m:"Acrylic · 6 finishes",p:"$128",o:"$160",r:"4.9",rv:"214",b:"best",i:"1519225421980-715cb0215aed",h:"1606800052052-a08af7148866"},
-    {t:"Custom Script Cake Topper",m:"Acrylic · Gold mirror",p:"$32",r:"5.0",rv:"421",b:"best",i:"1535254973040-607b474cb50d",h:"1522767131594-6b7e96848fba"},
-    {t:"Arched Welcome Sign",m:"Acrylic · Custom text",p:"$95",r:"5.0",rv:"176",i:"1591604466107-ec97de577aff",h:"1525258946800-98cfd641d0de"}
-  ];
-  var badgeCls = { best:"badge-best", "new":"badge-new", sale:"badge-sale" };
-  var badgeTxt = { best:"Bestseller", "new":"New", sale:"Sale" };
-  function card(p) {
-    return '<a class="card" href="product.html">' +
-      '<div class="imgbox">' +
-        (p.b ? '<span class="badge ' + badgeCls[p.b] + '">' + badgeTxt[p.b] + '</span>' : '') +
-        '<span class="fav" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5 6 5c2 0 3.2 1.3 4 2.5C10.8 6.3 12 5 14 5c3.5 0 5 4 3.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></span>' +
-        '<div class="bg bg1" role="img" aria-label="' + p.t + ' — ' + p.m + '" style="background-image:url(\'' + U(p.i, 600) + '\')"></div>' +
-        '<div class="bg bg2" aria-hidden="true" style="background-image:url(\'' + U(p.h, 600) + '\')"></div>' +
-      '</div>' +
-      '<div class="info">' +
-        '<h3>' + p.t + '</h3>' +
-        '<div class="mat">' + p.m + '</div>' +
-        '<div class="rate"><span class="star">★</span> ' + p.r + ' <span style="color:var(--muted)">(' + p.rv + ')</span></div>' +
-        '<div class="price">' + p.p + (p.o ? '<span class="old">' + p.o + '</span>' : '') + '</div>' +
-      '</div>' +
-    '</a>';
-  }
+  /* ---------- you may also like (from catalog: same category first) ---------- */
+  var pool = (window.HWL_PRODUCTS || []).filter(function (p) { return !product || p.id !== product.id; });
+  var related = pool.filter(function (p) { return product && p.cat === product.cat; }).slice(0, 4);
+  pool.forEach(function (p) { if (related.length < 4 && related.indexOf(p) === -1) related.push(p); });
+
   var also = document.getElementById('alsoProds');
-  also.innerHTML = related.map(card).join('');
+  also.innerHTML = related.map(window.HWL.cardHTML).join('');
   also.addEventListener('click', function (e) {
     var fav = e.target.closest('.fav');
     if (fav) {

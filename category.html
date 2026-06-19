@@ -47,6 +47,7 @@
 
 <!-- Shared chrome -->
 <link rel="stylesheet" href="assets/site.css" />
+<script src="assets/products.js"></script>
 <script defer src="assets/site.js"></script>
 
 <style>
@@ -184,45 +185,24 @@
 <footer id="site-footer"></footer>
 
 <script>
-  /* ---- category product data ---- */
-  var U = function (id, w) {
-    return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + (w || 600) + '&q=80';
-  };
-  var products = [
-    {t:"Wooden Place Names",m:"Oak · Walnut · Birch",p:"$4.50",r:"4.9",rv:"532",b:"best",i:"1464366400600-7168b8af9bc3",h:"1511285560929-80b456fea0bc"},
-    {t:"Acrylic Place Names",m:"Frosted · Clear · Mirror",p:"$5",r:"4.9",rv:"287",b:"new",i:"1606800052052-a08af7148866",h:"1519225421980-715cb0215aed"},
-    {t:"Gold-Edge Table Numbers",m:"Acrylic · 1–30",p:"$48",o:"$60",r:"4.8",rv:"318",b:"sale",i:"1523438885200-e635ba2c371e",h:"1478146896981-b80fe463b330"},
-    {t:"Custom Script Cake Topper",m:"Acrylic · Gold mirror",p:"$32",r:"5.0",rv:"421",b:"best",i:"1535254973040-607b474cb50d",h:"1522767131594-6b7e96848fba"},
-    {t:"Arched Welcome Sign",m:"Acrylic · Custom text",p:"$95",r:"5.0",rv:"176",i:"1591604466107-ec97de577aff",h:"1525258946800-98cfd641d0de"},
-    {t:"Mirror Acrylic Seating Chart",m:"Acrylic · 6 finishes",p:"$128",o:"$160",r:"4.9",rv:"214",b:"best",i:"1519225421980-715cb0215aed",h:"1606800052052-a08af7148866"},
-    {t:"Custom Logo Sign",m:"Layered Acrylic + Wood",p:"$240",r:"4.9",rv:"64",b:"new",i:"1517248135467-4c7edcad34c4",h:"1554118811-1e0d58224f24"},
-    {t:"Personalized Keepsake Gift",m:"Walnut · Engraved",p:"$38",r:"4.8",rv:"142",i:"1503602642458-232111445657",h:"1525258946800-98cfd641d0de"},
-    {t:"Rustic Wood Table Numbers",m:"Oak · Engraved",p:"$40",r:"4.8",rv:"98",i:"1464366400600-7168b8af9bc3",h:"1523438885200-e635ba2c371e"},
-    {t:"Hexagon Acrylic Place Cards",m:"Acrylic · Geometric",p:"$6",r:"4.9",rv:"203",b:"new",i:"1606800052052-a08af7148866",h:"1478146896981-b80fe463b330"}
-  ];
-  var badgeCls = {best:"badge-best", "new":"badge-new", sale:"badge-sale"};
-  var badgeTxt = {best:"Bestseller", "new":"New", sale:"Sale"};
+  /* ---- category page renders from the central catalog (assets/products.js) ---- */
+  var catalog = window.HWL_PRODUCTS || [];
+  var grid = document.getElementById('catProds');
+  var activeMaterials = {}; /* e.g. {Wood:true, Acrylic:true} — empty = show all */
 
-  function card(p) {
-    return '<a class="card" href="product.html">' +
-      '<div class="imgbox">' +
-        (p.b ? '<span class="badge ' + badgeCls[p.b] + '">' + badgeTxt[p.b] + '</span>' : '') +
-        '<span class="fav" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5 6 5c2 0 3.2 1.3 4 2.5C10.8 6.3 12 5 14 5c3.5 0 5 4 3.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></span>' +
-        '<div class="bg bg1" role="img" aria-label="' + p.t + ' — ' + p.m + '" style="background-image:url(\'' + U(p.i, 600) + '\')"></div>' +
-        '<div class="bg bg2" aria-hidden="true" style="background-image:url(\'' + U(p.h, 600) + '\')"></div>' +
-      '</div>' +
-      '<div class="info">' +
-        '<h3>' + p.t + '</h3>' +
-        '<div class="mat">' + p.m + '</div>' +
-        '<div class="rate"><span class="star">★</span> ' + p.r + ' <span style="color:var(--muted)">(' + p.rv + ')</span></div>' +
-        '<div class="price">' + p.p + (p.o ? '<span class="old">' + p.o + '</span>' : '') + '</div>' +
-      '</div>' +
-    '</a>';
+  function visibleProducts() {
+    var mats = Object.keys(activeMaterials).filter(function (k) { return activeMaterials[k]; });
+    if (!mats.length) return catalog;
+    return catalog.filter(function (p) { return activeMaterials[p.material]; });
   }
 
-  var grid = document.getElementById('catProds');
-  grid.innerHTML = products.map(card).join('');
-  document.getElementById('catMeta').textContent = products.length + ' pieces · Sort: Popular';
+  function renderGrid() {
+    var list = visibleProducts();
+    grid.innerHTML = list.map(window.HWL.cardHTML).join('');
+    document.getElementById('catMeta').textContent =
+      list.length + (list.length === 1 ? ' piece' : ' pieces') + ' · Sort: Popular';
+  }
+  renderGrid();
 
   /* heart = wishlist (don't navigate); card body = go to product.html */
   grid.addEventListener('click', function (e) {
@@ -234,7 +214,7 @@
     }
   });
 
-  /* style chips (single select) */
+  /* style chips (single select, visual) */
   document.querySelectorAll('.cat-bar .chips .chip').forEach(function (c) {
     c.addEventListener('click', function () {
       var cur = document.querySelector('.cat-bar .chips .chip.active');
@@ -243,10 +223,18 @@
     });
   });
 
-  /* filter checkboxes + colour swatches */
+  /* Material filter actually filters the grid; other filter groups stay visual */
   document.querySelectorAll('.filters .fg label').forEach(function (l) {
     var bx = l.querySelector('.bx');
-    if (bx) l.addEventListener('click', function () { bx.classList.toggle('on'); });
+    if (!bx) return;
+    var name = l.textContent.trim(); /* "Acrylic" / "Wood" / "MDF" / "Plywood" */
+    l.addEventListener('click', function () {
+      var on = bx.classList.toggle('on');
+      if (name === 'Wood' || name === 'Acrylic') {
+        activeMaterials[name] = on;
+        renderGrid();
+      }
+    });
   });
   document.querySelectorAll('.filters .colors .c').forEach(function (c) {
     c.addEventListener('click', function () { c.classList.toggle('on'); });
