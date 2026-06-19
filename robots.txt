@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kolomiichukvadym-a11y.github.io/honeywoodland/sitemap.xml
