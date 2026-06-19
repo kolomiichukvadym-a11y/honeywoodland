@@ -487,6 +487,49 @@
   .drawer .panel a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;
     letter-spacing:.08em;text-transform:uppercase}
   .drawer .panel svg{width:24px;height:24px;stroke:var(--charcoal);stroke-width:1.4;fill:none;cursor:pointer}
+
+  /* ============ INTERACTIONS ============ */
+  /* anchor offset so headings clear the sticky header */
+  [id]{scroll-margin-top:88px}
+
+  /* cart badge pop */
+  @keyframes badgePop{0%{transform:scale(1)}40%{transform:scale(1.55)}100%{transform:scale(1)}}
+  .cart-badge.pop{animation:badgePop .4s cubic-bezier(.22,1,.36,1)}
+
+  /* wishlist (header heart) + product card favourite active state */
+  .nav-icons a.wish.on svg{fill:var(--gold);stroke:var(--gold)}
+  .card .fav.on{opacity:1}
+  .card .fav.on svg{fill:var(--gold);stroke:var(--gold)}
+
+  /* toast */
+  .toast{position:fixed;left:50%;bottom:32px;transform:translate(-50%,20px);z-index:300;
+    background:var(--charcoal);color:var(--ivory);padding:14px 22px;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;box-shadow:0 14px 34px rgba(43,43,43,.32);opacity:0;pointer-events:none;
+    display:flex;align-items:center;gap:10px;transition:opacity .3s,transform .3s;max-width:90vw}
+  .toast::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* search dropdown */
+  .searchbar{position:fixed;left:0;right:0;top:0;z-index:150;background:var(--ivory);
+    border-bottom:1px solid var(--line);box-shadow:0 12px 30px rgba(43,43,43,.08);
+    transform:translateY(-100%);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+  .searchbar.open{transform:none}
+  .searchbar form{display:flex;align-items:center;gap:16px;height:74px}
+  .searchbar svg{width:20px;height:20px;stroke:var(--gold-deep);stroke-width:1.6;fill:none;flex-shrink:0}
+  .searchbar input{flex:1;border:none;background:none;outline:none;font-family:var(--serif);
+    font-size:clamp(18px,3vw,26px);color:var(--charcoal)}
+  .searchbar input::placeholder{color:var(--taupe)}
+  .searchbar .close{cursor:pointer;border:none;background:none;font-size:24px;line-height:1;color:var(--muted)}
+  .searchbar .close:hover{color:var(--charcoal)}
+
+  /* make interactive mock controls show pointer + active states */
+  .catgrid a,.cat,.ev,.biz-card,.card,.chip,.filters label,.filters .colors .c,
+  .cart-item .qty button,.sublinks a,.arrow,.foot-col a[href]{cursor:pointer}
+  .chip{user-select:none}
+  .filters .fg label .bx.on{background:var(--gold);border-color:var(--gold);position:relative}
+  .filters .fg label .bx.on::after{content:"";position:absolute;left:4px;top:1px;width:5px;height:9px;
+    border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .filters .colors .c.on{box-shadow:0 0 0 2px var(--gold),0 0 0 4px var(--ivory)}
 </style>
 </head>
 <body>
@@ -512,15 +555,27 @@
       <span class="tag">Atelier of Details</span>
     </a>
     <div class="nav-icons">
-      <a href="#"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></a>
-      <a href="#"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5 6 5c2 0 3.2 1.3 4 2.5C10.8 6.3 12 5 14 5c3.5 0 5 4 3.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></a>
-      <a href="#cart" class="cart-ico">
+      <a role="button" tabindex="0" aria-label="Search" onclick="openSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></a>
+      <a class="wish" role="button" tabindex="0" aria-label="Wishlist" aria-pressed="false" onclick="toggleWish(this)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5 6 5c2 0 3.2 1.3 4 2.5C10.8 6.3 12 5 14 5c3.5 0 5 4 3.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></a>
+      <a href="#cart" class="cart-ico" aria-label="Cart">
         <svg viewBox="0 0 24 24"><path d="M6 7h12l-1.5 12.5a1 1 0 0 1-1 .9H8.5a1 1 0 0 1-1-.9L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
         <span class="cart-badge">2</span>
       </a>
     </div>
   </div>
 </header>
+
+<!-- SEARCH DROPDOWN -->
+<div class="searchbar" id="searchBar">
+  <form class="wrap" onsubmit="return doSearch(event)">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    <input id="searchInput" type="search" placeholder="Search place names, table numbers, signs…" aria-label="Search products" />
+    <button type="button" class="close" onclick="closeSearch()" aria-label="Close search">✕</button>
+  </form>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -564,14 +619,14 @@
       <h2>The signature collection</h2>
     </div>
     <div class="catgrid reveal">
-      <a><div class="im"><div class="bg" role="img" aria-label="Personalized laser-cut wooden place names for weddings" style="background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Wooden Place Names</div><div class="ct">From $4.50</div></a>
-      <a><div class="im"><div class="bg" role="img" aria-label="Custom acrylic place names for wedding place settings" style="background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Acrylic Place Names</div><div class="ct">From $5</div></a>
-      <a><div class="im"><div class="bg" role="img" aria-label="Personalized acrylic wedding table numbers" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Table Numbers</div><div class="ct">From $48</div></a>
-      <a><div class="im"><div class="bg" role="img" aria-label="Custom laser-cut acrylic wedding cake topper" style="background-image:url('https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Cake Toppers</div><div class="ct">From $32</div></a>
-      <a><div class="im"><div class="bg" role="img" aria-label="Custom acrylic and wood wedding signs" style="background-image:url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Wedding Signs</div><div class="ct">From $95</div></a>
-      <a><div class="im"><div class="bg" role="img" aria-label="Personalized restaurant table numbers for business" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Restaurant Table Numbers</div><div class="ct">Trade pricing</div></a>
-      <a><div class="im"><div class="bg" role="img" aria-label="Custom laser-cut logo signs for brands and business" style="background-image:url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Custom Logo Signs</div><div class="ct">From $240</div></a>
-      <a><div class="im"><div class="bg" role="img" aria-label="Personalized engraved wooden keepsake gifts" style="background-image:url('https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Personalized Gifts</div><div class="ct">From $38</div></a>
+      <a href="#shop"><div class="im"><div class="bg" role="img" aria-label="Personalized laser-cut wooden place names for weddings" style="background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Wooden Place Names</div><div class="ct">From $4.50</div></a>
+      <a href="#shop"><div class="im"><div class="bg" role="img" aria-label="Custom acrylic place names for wedding place settings" style="background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Acrylic Place Names</div><div class="ct">From $5</div></a>
+      <a href="#shop"><div class="im"><div class="bg" role="img" aria-label="Personalized acrylic wedding table numbers" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Table Numbers</div><div class="ct">From $48</div></a>
+      <a href="#shop"><div class="im"><div class="bg" role="img" aria-label="Custom laser-cut acrylic wedding cake topper" style="background-image:url('https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Cake Toppers</div><div class="ct">From $32</div></a>
+      <a href="#shop"><div class="im"><div class="bg" role="img" aria-label="Custom acrylic and wood wedding signs" style="background-image:url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Wedding Signs</div><div class="ct">From $95</div></a>
+      <a href="#shop"><div class="im"><div class="bg" role="img" aria-label="Personalized restaurant table numbers for business" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Restaurant Table Numbers</div><div class="ct">Trade pricing</div></a>
+      <a href="#shop"><div class="im"><div class="bg" role="img" aria-label="Custom laser-cut logo signs for brands and business" style="background-image:url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Custom Logo Signs</div><div class="ct">From $240</div></a>
+      <a href="#shop"><div class="im"><div class="bg" role="img" aria-label="Personalized engraved wooden keepsake gifts" style="background-image:url('https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=500&q=80')"></div></div><div class="nm">Personalized Gifts</div><div class="ct">From $38</div></a>
     </div>
   </div>
 </section>
@@ -584,17 +639,17 @@
       <h2>Made for every celebration</h2>
     </div>
     <div class="cats reveal">
-      <a class="cat">
+      <a class="cat" href="#wedding">
         <div class="bg" role="img" aria-label="Personalized wedding décor with place names and signs" style="background-image:url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80')"></div>
         <div class="ov"></div>
         <div class="txt"><h3>Weddings</h3><p>Place names, signs &amp; charts</p><div class="explore">Explore →</div></div>
       </a>
-      <a class="cat">
+      <a class="cat" href="#events">
         <div class="bg" role="img" aria-label="Custom décor for birthdays, showers and events" style="background-image:url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80')"></div>
         <div class="ov"></div>
         <div class="txt"><h3>Events</h3><p>Birthdays, showers &amp; more</p><div class="explore">Explore →</div></div>
       </a>
-      <a class="cat">
+      <a class="cat" href="#business">
         <div class="bg" role="img" aria-label="Custom signs and table numbers for restaurants, hotels and brands" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80')"></div>
         <div class="ov"></div>
         <div class="txt"><h3>For Business</h3><p>Restaurants, hotels &amp; brands</p><div class="explore">Explore →</div></div>
@@ -608,7 +663,7 @@
   <div class="wrap">
     <div class="head row reveal">
       <div><p class="overline">Most Loved</p><h2>Wedding bestsellers</h2></div>
-      <a class="arrow">View all →</a>
+      <a class="arrow" href="#shop">View all →</a>
     </div>
     <div class="prods reveal" id="bestsellers"></div>
   </div>
@@ -624,12 +679,12 @@
         <h2>Every name, beautifully placed</h2>
         <p>From hand-engraved wooden place names to mirror-acrylic seating charts — each piece is personalized to your story and finished by hand in our atelier.</p>
         <div class="sublinks">
-          <a>Wooden Place Names <span>→</span></a>
-          <a>Acrylic Place Names <span>→</span></a>
-          <a>Table Numbers <span>→</span></a>
-          <a>Cake Toppers <span>→</span></a>
+          <a href="#shop">Wooden Place Names <span>→</span></a>
+          <a href="#shop">Acrylic Place Names <span>→</span></a>
+          <a href="#shop">Table Numbers <span>→</span></a>
+          <a href="#shop">Cake Toppers <span>→</span></a>
         </div>
-        <a class="btn btn-primary">Shop Wedding Collection</a>
+        <a class="btn btn-primary" href="#shop">Shop Wedding Collection</a>
       </div>
     </div>
   </div>
@@ -641,11 +696,11 @@
     <div class="head reveal"><p class="overline">Beyond the Aisle</p><h2>Décor for every celebration</h2></div>
   </div>
   <div class="scroller reveal" style="max-width:var(--max);margin:0 auto">
-    <a class="ev"><div class="bg" role="img" aria-label="Personalized birthday party décor and signs" style="background-image:url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Birthday</h3><p>From $18</p></div></a>
-    <a class="ev"><div class="bg" role="img" aria-label="Custom baby shower décor and place names" style="background-image:url('https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Baby Shower</h3><p>From $22</p></div></a>
-    <a class="ev"><div class="bg" role="img" aria-label="Personalized baptism keepsake décor" style="background-image:url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Baptism</h3><p>From $20</p></div></a>
-    <a class="ev"><div class="bg" role="img" aria-label="Custom anniversary engraved décor and signs" style="background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Anniversary</h3><p>From $28</p></div></a>
-    <a class="ev"><div class="bg" role="img" aria-label="Custom corporate event signage and table numbers" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Corporate</h3><p>From $40</p></div></a>
+    <a class="ev" href="#shop"><div class="bg" role="img" aria-label="Personalized birthday party décor and signs" style="background-image:url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Birthday</h3><p>From $18</p></div></a>
+    <a class="ev" href="#shop"><div class="bg" role="img" aria-label="Custom baby shower décor and place names" style="background-image:url('https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Baby Shower</h3><p>From $22</p></div></a>
+    <a class="ev" href="#shop"><div class="bg" role="img" aria-label="Personalized baptism keepsake décor" style="background-image:url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Baptism</h3><p>From $20</p></div></a>
+    <a class="ev" href="#shop"><div class="bg" role="img" aria-label="Custom anniversary engraved décor and signs" style="background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Anniversary</h3><p>From $28</p></div></a>
+    <a class="ev" href="#shop"><div class="bg" role="img" aria-label="Custom corporate event signage and table numbers" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"></div><div class="txt"><h3>Corporate</h3><p>From $40</p></div></a>
   </div>
 </section>
 
@@ -661,12 +716,12 @@
         <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Your brandbook saved for instant reorders</li>
         <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Dedicated account manager for large projects</li>
       </ul>
-      <a class="btn btn-primary">Explore For Business</a>
+      <a class="btn btn-primary" href="#shop">Explore For Business</a>
     </div>
     <div class="biz-cards reveal">
-      <a class="biz-card"><div class="bg" role="img" aria-label="Custom restaurant table numbers and signage" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80')"></div><div class="ov"></div><h3>Restaurants</h3></a>
-      <a class="biz-card"><div class="bg" role="img" aria-label="Custom branded signage for hotels" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80')"></div><div class="ov"></div><h3>Hotels</h3></a>
-      <a class="biz-card"><div class="bg" role="img" aria-label="Personalized corporate gifts and branded décor" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=500&q=80')"></div><div class="ov"></div><h3>Corporate</h3></a>
+      <a class="biz-card" href="#shop"><div class="bg" role="img" aria-label="Custom restaurant table numbers and signage" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80')"></div><div class="ov"></div><h3>Restaurants</h3></a>
+      <a class="biz-card" href="#shop"><div class="bg" role="img" aria-label="Custom branded signage for hotels" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80')"></div><div class="ov"></div><h3>Hotels</h3></a>
+      <a class="biz-card" href="#shop"><div class="bg" role="img" aria-label="Personalized corporate gifts and branded décor" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=500&q=80')"></div><div class="ov"></div><h3>Corporate</h3></a>
     </div>
   </div>
 </section>
@@ -683,7 +738,7 @@
         <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="t">Preview</div><div class="c">See it rendered live</div></div>
         <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div><div class="t">Free proof</div><div class="c">Approve before we make</div></div>
       </div>
-      <a class="btn btn-primary">Start Designing</a>
+      <a class="btn btn-primary" href="#product">Start Designing</a>
     </div>
     <div class="dyo-preview reveal">
       <div class="bg" role="img" aria-label="Live preview of a custom acrylic place name design" style="background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=900&q=80')"></div>
@@ -697,7 +752,7 @@
   <div class="wrap">
     <div class="head row reveal">
       <div><p class="overline">Across the Collection</p><h2>New &amp; for every occasion</h2></div>
-      <a class="arrow">View all →</a>
+      <a class="arrow" href="#shop">View all →</a>
     </div>
     <div class="prods reveal" id="newarrivals"></div>
   </div>
@@ -720,7 +775,7 @@
   <div class="wrap">
     <div class="head row reveal">
       <div><p class="overline">Real Moments</p><h2>Inspiration gallery</h2></div>
-      <a class="arrow">See all stories →</a>
+      <a class="arrow" href="#inspiration">See all stories →</a>
     </div>
   </div>
   <div class="wrap reveal">
@@ -736,7 +791,7 @@
 </section>
 
 <!-- ============ PRODUCT PAGE MOCKUP ============ -->
-<div class="wrap mock-label"><span class="tag">Product Page</span></div>
+<div class="wrap mock-label" id="product"><span class="tag">Product Page</span></div>
 <div class="wrap"><div class="mock-frame">
   <div class="pdp">
     <div class="gallery">
@@ -801,7 +856,7 @@
 </div></div>
 
 <!-- ============ CATEGORY PAGE MOCKUP ============ -->
-<div class="wrap mock-label"><span class="tag">Category Page</span></div>
+<div class="wrap mock-label" id="shop"><span class="tag">Category Page</span></div>
 <div class="wrap"><div class="mock-frame plp">
   <div class="plp-hero" role="img" aria-label="Personalized wedding table numbers collection banner" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=2000&q=80')">
     <div class="ov"></div>
@@ -847,33 +902,33 @@
     <div>
       <h2 style="font-size:28px;margin-bottom:8px">Your Cart</h2>
       <p style="font-size:14px;color:var(--muted);margin-bottom:20px">2 items</p>
-      <div class="cart-item">
+      <div class="cart-item" data-unit="48">
         <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=200&q=80')"></div>
         <div class="cd">
           <h3>Gold-Edge Acrylic Table Numbers</h3>
           <div class="v">Acrylic · Gold Mirror · 1–20</div>
-          <div class="qty"><button>−</button><span>2</span><button>+</button></div>
+          <div class="qty"><button type="button">−</button><span>2</span><button type="button">+</button></div>
         </div>
-        <div style="font-weight:500">$96</div>
+        <div class="line" style="font-weight:500">$96</div>
       </div>
-      <div class="cart-item">
+      <div class="cart-item" data-unit="95">
         <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=200&q=80')"></div>
         <div class="cd">
           <h3>Arched Acrylic Welcome Sign</h3>
           <div class="v">Acrylic · "Emma & James"</div>
-          <div class="qty"><button>−</button><span>1</span><button>+</button></div>
+          <div class="qty"><button type="button">−</button><span>1</span><button type="button">+</button></div>
         </div>
-        <div style="font-weight:500">$95</div>
+        <div class="line" style="font-weight:500">$95</div>
       </div>
     </div>
     <div class="cart-sum">
       <h2>Order Summary</h2>
-      <div style="font-size:13px;color:var(--muted)">Add $14 more for complimentary shipping</div>
-      <div class="ship-bar"><i></i></div>
-      <div class="ln"><span>Subtotal</span><span>$191</span></div>
+      <div style="font-size:13px;color:var(--muted)" id="cShip">Add $14 more for complimentary shipping</div>
+      <div class="ship-bar"><i id="cBar"></i></div>
+      <div class="ln"><span>Subtotal</span><span id="cSub">$191</span></div>
       <div class="ln"><span>Member discount</span><span style="color:var(--gold-deep)">−$10</span></div>
       <div class="ln"><span>Shipping</span><span>Calculated</span></div>
-      <div class="tot"><span>Total</span><span>$181</span></div>
+      <div class="tot"><span>Total</span><span id="cTot">$181</span></div>
       <a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px">Checkout</a>
       <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px">Free design proof before production</div>
     </div>
@@ -937,7 +992,7 @@
 </section>
 
 <!-- FAQ -->
-<section class="section" style="background:var(--cream)">
+<section class="section" id="faq" style="background:var(--cream)">
   <div class="wrap">
     <div class="head reveal"><p class="overline">Good to Know</p><h2>Frequently asked</h2></div>
     <div class="faq reveal">
@@ -964,10 +1019,10 @@
       <div class="name">HoneyWoodLand</div>
       <p>Personalized wooden &amp; acrylic décor for weddings, events and beautiful moments — handcrafted in our own atelier.</p>
     </div>
-    <div class="foot-col"><h4>Shop</h4><a>Place Names</a><a>Table Numbers</a><a>Seating Charts</a><a>Welcome Signs</a><a>Best Sellers</a></div>
-    <div class="foot-col"><h4>For Business</h4><a>Restaurants</a><a>Hotels</a><a>Corporate Gifts</a><a>Trade Program</a><a>Request a Quote</a></div>
-    <div class="foot-col"><h4>Help</h4><a>Shipping</a><a>Returns</a><a>FAQ</a><a>Track Order</a><a>Contact</a></div>
-    <div class="foot-col"><h4>Atelier</h4><a>Our Story</a><a>How It's Made</a><a>Inspiration</a><a>Design Your Own</a><a>Reviews</a></div>
+    <div class="foot-col"><h4>Shop</h4><a href="#categories">Place Names</a><a href="#categories">Table Numbers</a><a href="#categories">Seating Charts</a><a href="#categories">Welcome Signs</a><a href="#shop">Best Sellers</a></div>
+    <div class="foot-col"><h4>For Business</h4><a href="#business">Restaurants</a><a href="#business">Hotels</a><a href="#business">Corporate Gifts</a><a href="#business">Trade Program</a><a href="#business">Request a Quote</a></div>
+    <div class="foot-col"><h4>Help</h4><a href="#faq">Shipping</a><a href="#faq">Returns</a><a href="#faq">FAQ</a><a href="#faq">Track Order</a><a href="#faq">Contact</a></div>
+    <div class="foot-col"><h4>Atelier</h4><a href="#wedding">Our Story</a><a href="#dyo">How It's Made</a><a href="#inspiration">Inspiration</a><a href="#dyo">Design Your Own</a><a href="#reviews">Reviews</a></div>
   </div>
   <div class="wrap foot-bottom">
     <span>MADE IN OUR OWN ATELIER · SHIPS TO US · CA · EU · FREE DESIGN PROOF</span>
@@ -1097,6 +1152,94 @@
   /* drawer */
   function openDrawer(){document.getElementById('drawer').classList.add('open');document.body.style.overflow='hidden';}
   function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.body.style.overflow='';}
+
+  /* ---------- toast ---------- */
+  let _toastT;
+  function toast(msg){
+    const t=document.getElementById('toast');
+    t.textContent=msg;t.classList.add('show');
+    clearTimeout(_toastT);_toastT=setTimeout(()=>t.classList.remove('show'),2000);
+  }
+
+  /* ---------- cart ---------- */
+  let cartCount=2;
+  const cartBadge=document.querySelector('.cart-badge');
+  function addToCart(n=1){
+    cartCount+=n;cartBadge.textContent=cartCount;
+    cartBadge.classList.remove('pop');void cartBadge.offsetWidth;cartBadge.classList.add('pop');
+    toast('Added to cart');
+  }
+  /* PDP add to cart */
+  document.querySelector('.addcart').addEventListener('click',e=>{e.preventDefault();addToCart(1);});
+  /* phone mock "Add to Cart" buttons */
+  document.querySelectorAll('.ph-sticky .ab').forEach(b=>b.addEventListener('click',()=>addToCart(1)));
+
+  /* product cards: heart = wishlist, card body = add to cart */
+  ['bestsellers','newarrivals','plpProds'].forEach(id=>{
+    const grid=document.getElementById(id);if(!grid)return;
+    grid.addEventListener('click',e=>{
+      const fav=e.target.closest('.fav');
+      if(fav){e.preventDefault();fav.classList.toggle('on');
+        toast(fav.classList.contains('on')?'Added to wishlist':'Removed from wishlist');return;}
+      const card=e.target.closest('.card');
+      if(card){e.preventDefault();addToCart(1);}
+    });
+  });
+
+  /* ---------- cart-mock quantity steppers ---------- */
+  const FREE_SHIP=150,MEMBER_DISC=10;
+  const cSub=document.getElementById('cSub'),cTot=document.getElementById('cTot'),
+        cShip=document.getElementById('cShip'),cBar=document.getElementById('cBar');
+  function recalcCart(){
+    let sub=0;
+    document.querySelectorAll('.cart-item').forEach(it=>{
+      const unit=+it.dataset.unit||0,q=+it.querySelector('.qty span').textContent;
+      const line=unit*q;sub+=line;it.querySelector('.line').textContent='$'+line;
+    });
+    const tot=Math.max(0,sub-MEMBER_DISC);
+    cSub.textContent='$'+sub;cTot.textContent='$'+tot;
+    const remain=FREE_SHIP-sub;
+    cShip.textContent=remain>0?`Add $${remain} more for complimentary shipping`:'You’ve unlocked complimentary shipping';
+    cBar.style.width=Math.min(100,Math.round(sub/FREE_SHIP*100))+'%';
+  }
+  document.querySelectorAll('.cart-item .qty').forEach(q=>{
+    const span=q.querySelector('span'),btns=q.querySelectorAll('button');
+    btns[0].addEventListener('click',()=>{span.textContent=Math.max(1,(+span.textContent)-1);recalcCart();});
+    btns[1].addEventListener('click',()=>{span.textContent=(+span.textContent)+1;recalcCart();});
+  });
+  recalcCart();
+
+  /* ---------- search dropdown ---------- */
+  const searchBar=document.getElementById('searchBar'),searchInput=document.getElementById('searchInput');
+  function openSearch(){searchBar.classList.add('open');setTimeout(()=>searchInput.focus(),120);}
+  function closeSearch(){searchBar.classList.remove('open');}
+  function doSearch(e){
+    e.preventDefault();const v=searchInput.value.trim();
+    toast(v?`Searching “${v}”…`:'Type to search our atelier');
+    if(v)closeSearch();
+    return false;
+  }
+
+  /* ---------- wishlist (header heart) ---------- */
+  function toggleWish(el){
+    const on=el.classList.toggle('on');
+    el.setAttribute('aria-pressed',on?'true':'false');
+    toast(on?'Added to wishlist':'Removed from wishlist');
+  }
+
+  /* ---------- PLP mock: chips, filters ---------- */
+  document.querySelectorAll('.plp-bar .chips .chip').forEach(c=>c.addEventListener('click',()=>{
+    const cur=document.querySelector('.plp-bar .chips .chip.active');
+    if(cur)cur.classList.remove('active');c.classList.add('active');
+  }));
+  document.querySelectorAll('.filters .fg label').forEach(l=>{
+    const bx=l.querySelector('.bx');
+    if(bx)l.addEventListener('click',()=>bx.classList.toggle('on'));
+  });
+  document.querySelectorAll('.filters .colors .c').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('on')));
+
+  /* ---------- close overlays on Escape ---------- */
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closeDrawer();}});
 </script>
 </body>
 </html>
