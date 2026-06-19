@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Cart | HoneyWoodLand</title>
+<meta name="description" content="Review the personalized wedding décor in your HoneyWoodLand cart — place names, table numbers and custom signs. Free design proof before production, worldwide shipping." />
+<meta name="robots" content="noindex, follow" />
+<meta name="theme-color" content="#B8975A" />
+<link rel="canonical" href="https://kolomiichukvadym-a11y.github.io/honeywoodland/cart.html" />
+
+<!-- Favicon (emoji data-URI) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍯</text></svg>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Shared chrome -->
+<link rel="stylesheet" href="assets/site.css" />
+<script defer src="assets/site.js"></script>
+
+<style>
+  /* ===== cart page (page-specific) ===== */
+  .breadcrumb{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:22px 0 6px}
+  .breadcrumb a:hover{color:var(--gold-deep)}
+  .breadcrumb .sep{margin:0 8px;color:var(--taupe)}
+  .breadcrumb .cur{color:var(--charcoal)}
+
+  .cart-head{padding:6px 0 4px}
+  .cart-head h1{font-size:clamp(2rem,4vw,2.8rem)}
+  .cart-count{font-size:14px;color:var(--muted);margin-top:6px}
+
+  .cart-grid{display:grid;grid-template-columns:1fr 360px;gap:48px;padding:28px 0 96px;align-items:start}
+  @media(max-width:900px){.cart-grid{grid-template-columns:1fr;gap:32px}}
+
+  .ship-progress{margin-bottom:8px}
+  .ship-msg{font-size:13px;color:var(--muted)}
+  .ship-bar{height:6px;background:var(--line);margin:12px 0 8px;border-radius:3px;overflow:hidden}
+  .ship-bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s cubic-bezier(.22,1,.36,1)}
+
+  .cart-item{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--line)}
+  .cart-item .thumb{width:90px;height:110px;background-size:cover;background-position:center;border:1px solid var(--line);flex-shrink:0;background-color:var(--cream)}
+  .cart-item .cd{flex:1;min-width:0}
+  .cart-item h3{font-size:18px;font-weight:500}
+  .cart-item h3 a{transition:color .3s}
+  .cart-item h3 a:hover{color:var(--gold-deep)}
+  .cart-item .v{font-size:13px;color:var(--muted);margin-top:4px}
+  .cart-item .row2{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap}
+  .qty{display:inline-flex;border:1px solid var(--line)}
+  .qty button{width:32px;height:32px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--charcoal);transition:color .2s}
+  .qty button:hover{color:var(--gold-deep)}
+  .qty span{width:36px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  .cart-item .right{display:flex;align-items:center;gap:16px}
+  .cart-item .line{font-weight:500;font-family:var(--serif);font-size:18px}
+  .cart-item .rm{background:none;border:none;cursor:pointer;color:var(--taupe);font-size:16px;line-height:1;transition:color .2s}
+  .cart-item .rm:hover{color:#B5544A}
+
+  .cart-sum{background:var(--cream);border:1px solid var(--line);padding:28px;position:sticky;top:88px}
+  .cart-sum h2{font-size:22px;margin-bottom:18px}
+  .cart-sum .ln{display:flex;justify-content:space-between;font-size:14px;padding:6px 0;color:var(--muted)}
+  .cart-sum .tot{display:flex;justify-content:space-between;font-size:18px;font-weight:500;color:var(--charcoal);
+    border-top:1px solid var(--line);margin-top:14px;padding-top:16px}
+  .promo{display:flex;gap:8px;margin:20px 0 4px}
+  .promo input{flex:1;min-width:0;height:44px;border:1px solid var(--line);background:#fff;padding:0 12px;
+    font-family:var(--sans);font-size:14px;outline:none}
+  .promo input:focus{border-color:var(--gold)}
+  .promo .btn{padding:0 18px;height:44px;font-size:12px;white-space:nowrap}
+  .cart-sum .checkout{width:100%;justify-content:center;margin-top:14px;padding:16px}
+  .pay{display:flex;justify-content:center;gap:10px;margin-top:16px;font-size:11px;letter-spacing:.1em;color:var(--muted);flex-wrap:wrap}
+  .proof{text-align:center;font-size:12px;color:var(--muted);margin-top:12px}
+
+  .empty{text-align:center;padding:72px 0 110px}
+  .empty h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-top:12px}
+  .empty p{color:var(--muted);max-width:460px;margin:14px auto 28px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- SHARED HEADER (injected by assets/site.js) -->
+<header id="site-header"></header>
+
+<main class="wrap">
+  <!-- BREADCRUMB -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Home</a><span class="sep">/</span>
+    <span class="cur">Cart</span>
+  </nav>
+
+  <div class="cart-head">
+    <h1>Your Cart</h1>
+    <div class="cart-count" id="cartCount"></div>
+  </div>
+
+  <!-- FILLED CART -->
+  <div id="cartFull">
+    <div class="cart-grid">
+      <div class="cart-left">
+        <div class="ship-progress">
+          <div class="ship-msg" id="cShipMsg"></div>
+          <div class="ship-bar"><i id="cBar"></i></div>
+        </div>
+        <div id="cartItems"></div>
+      </div>
+
+      <aside class="cart-sum">
+        <h2>Order Summary</h2>
+        <div class="ln"><span>Subtotal</span><span id="cSub">$0</span></div>
+        <div class="ln"><span>Member discount</span><span id="cDisc" style="color:var(--gold-deep)">−$0</span></div>
+        <div class="ln"><span>Shipping</span><span id="cShipVal">Calculated</span></div>
+        <div class="tot"><span>Total</span><span id="cTot">$0</span></div>
+        <div class="promo">
+          <input id="promoInput" type="text" placeholder="Promo code" aria-label="Promo code" />
+          <button type="button" id="promoBtn" class="btn btn-outline">Apply</button>
+        </div>
+        <a href="cart.html#checkout" class="btn btn-primary checkout" id="checkoutBtn" role="button">Checkout</a>
+        <div class="pay">VISA · MASTERCARD · AMEX · PAYPAL</div>
+        <div class="proof">Free design proof before production</div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- EMPTY CART -->
+  <div id="cartEmpty" class="empty" style="display:none">
+    <p class="overline">Your Cart</p>
+    <h2>Your cart is empty</h2>
+    <p>Looks like you haven’t added anything yet — explore the collection to begin your personalized pieces.</p>
+    <a href="category.html" class="btn btn-primary">Continue Shopping</a>
+  </div>
+</main>
+
+<!-- SHARED FOOTER (injected by assets/site.js) -->
+<footer id="site-footer"></footer>
+
+<script>
+  var U = function (id, w) {
+    return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + (w || 200) + '&q=80';
+  };
+
+  /* sample cart contents */
+  var cart = [
+    { t:"Gold-Edge Acrylic Table Numbers", v:'Acrylic · Gold Mirror · 1–20', unit:48, qty:2, img:"1523438885200-e635ba2c371e" },
+    { t:"Arched Acrylic Welcome Sign", v:'Acrylic · “Emma & James”', unit:95, qty:1, img:"1591604466107-ec97de577aff" },
+    { t:"Wooden Place Names", v:'Oak · Engraved', unit:4.5, qty:6, img:"1464366400600-7168b8af9bc3" }
+  ];
+
+  var FREE_SHIP = 150, MEMBER_DISC = 10;
+
+  function money(n) {
+    n = Math.round(n * 100) / 100;
+    return '$' + (Number.isInteger(n) ? n : n.toFixed(2));
+  }
+  function totalQty() { return cart.reduce(function (s, i) { return s + i.qty; }, 0); }
+  function subtotal() { return cart.reduce(function (s, i) { return s + i.unit * i.qty; }, 0); }
+
+  /* keep the shared header badge + localStorage in sync with this cart */
+  function syncBadge() {
+    var q = totalQty();
+    localStorage.setItem('hwl_cart', q);
+    var b = document.querySelector('.cart-badge');
+    if (b) b.textContent = q;
+  }
+
+  function render() {
+    var full = document.getElementById('cartFull');
+    var empty = document.getElementById('cartEmpty');
+    var countEl = document.getElementById('cartCount');
+
+    if (cart.length === 0) {
+      full.style.display = 'none';
+      empty.style.display = 'block';
+      countEl.textContent = '';
+      syncBadge();
+      return;
+    }
+    full.style.display = '';
+    empty.style.display = 'none';
+
+    document.getElementById('cartItems').innerHTML = cart.map(function (it, ix) {
+      return '<div class="cart-item" data-ix="' + ix + '">' +
+        '<div class="thumb" role="img" aria-label="' + it.t + '" style="background-image:url(\'' + U(it.img, 200) + '\')"></div>' +
+        '<div class="cd">' +
+          '<h3><a href="product.html">' + it.t + '</a></h3>' +
+          '<div class="v">' + it.v + '</div>' +
+          '<div class="row2">' +
+            '<div class="qty"><button type="button" data-act="dec" aria-label="Decrease quantity">−</button>' +
+            '<span>' + it.qty + '</span>' +
+            '<button type="button" data-act="inc" aria-label="Increase quantity">+</button></div>' +
+            '<div class="right"><span class="line">' + money(it.unit * it.qty) + '</span>' +
+            '<button type="button" class="rm" data-act="rm" aria-label="Remove ' + it.t + '">✕</button></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    var n = cart.length;
+    countEl.textContent = n + (n === 1 ? ' item' : ' items');
+
+    var sub = subtotal();
+    var disc = Math.min(MEMBER_DISC, sub);
+    var tot = Math.max(0, sub - disc);
+    document.getElementById('cSub').textContent = money(sub);
+    document.getElementById('cDisc').textContent = '−' + money(disc);
+    document.getElementById('cTot').textContent = money(tot);
+    document.getElementById('cShipVal').textContent = sub >= FREE_SHIP ? 'Free' : 'Calculated';
+
+    var remain = FREE_SHIP - sub;
+    document.getElementById('cShipMsg').textContent = remain > 0
+      ? 'Add ' + money(remain) + ' more for complimentary shipping'
+      : 'You’ve unlocked complimentary shipping';
+    document.getElementById('cBar').style.width = Math.min(100, Math.round(sub / FREE_SHIP * 100)) + '%';
+
+    syncBadge();
+  }
+
+  /* qty steppers + remove (event delegation) */
+  document.getElementById('cartItems').addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var item = e.target.closest('.cart-item');
+    if (!item) return;
+    var ix = +item.dataset.ix, act = btn.dataset.act;
+    if (act === 'inc') cart[ix].qty++;
+    else if (act === 'dec') cart[ix].qty = Math.max(1, cart[ix].qty - 1);
+    else if (act === 'rm') { cart.splice(ix, 1); window.toast('Removed from cart'); }
+    render();
+  });
+
+  /* promo + checkout */
+  document.getElementById('promoBtn').addEventListener('click', function () {
+    var v = document.getElementById('promoInput').value.trim();
+    window.toast(v ? 'Promo code applied at checkout' : 'Enter a promo code');
+  });
+  document.getElementById('checkoutBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    window.toast('Checkout coming soon');
+  });
+
+  render();
+</script>
+</body>
+</html>
