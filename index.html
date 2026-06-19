@@ -314,133 +314,13 @@
   .faq-item.open .faq-a{max-height:200px;padding-bottom:22px}
   .faq-item.open .pm{transform:rotate(45deg)}
 
-  /* ============ SUB-PAGE MOCKUPS WRAP ============ */
-  .mock-label{text-align:center;padding:64px 0 0}
-  .mock-label .tag{display:inline-block;background:var(--charcoal);color:var(--ivory);font-size:11px;
-    letter-spacing:.18em;text-transform:uppercase;padding:8px 20px}
-  .mock-frame{border:1px solid var(--line);margin:32px auto 0;background:var(--ivory);overflow:hidden}
-
-  /* PRODUCT PAGE MOCKUP */
-  .pdp{display:grid;grid-template-columns:58% 42%;gap:40px;padding:40px}
-  .pdp .gallery .main{aspect-ratio:4/5;background-size:cover;background-position:center;border:1px solid var(--line);position:relative}
-  .pdp .gallery .main .badge{position:absolute;top:12px;left:12px;background:var(--gold);color:#fff;
-    font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px}
-  .pdp .gallery .thumbs{display:flex;gap:10px;margin-top:12px}
-  .pdp .gallery .thumbs div{width:18%;aspect-ratio:4/5;background-size:cover;background-position:center;border:1px solid var(--line)}
-  .pdp .gallery .thumbs div.active{border:1px solid var(--gold)}
-  .pdp h2{font-size:clamp(1.6rem,3vw,2.2rem)}
-  .pdp .rate{display:flex;align-items:center;gap:6px;font-size:13px;margin-top:8px}
-  .pdp .rate .s{color:var(--gold)}.pdp .rate .lk{color:var(--muted);text-decoration:underline}
-  .pdp .price{display:flex;align-items:center;gap:12px;margin-top:16px}
-  .pdp .price .now{font-size:26px;font-weight:500}
-  .pdp .price .old{font-size:16px;color:var(--taupe);text-decoration:line-through}
-  .pdp .price .save{background:var(--blush);color:var(--gold-deep);font-size:11px;font-weight:600;
-    letter-spacing:.05em;text-transform:uppercase;padding:3px 8px}
-  .opt{margin-top:26px}
-  .opt .lab{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-  .opt .lab span{color:var(--muted)}
-  .swatches{display:flex;gap:12px;margin-top:12px}
-  .sw{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);cursor:pointer;transition:box-shadow .2s}
-  .sw.active{box-shadow:0 0 0 2px var(--gold),0 0 0 4px var(--ivory)}
-  .sizes{display:flex;gap:12px;margin-top:12px}
-  .size{border:1px solid var(--line);padding:10px 16px;font-size:13px;cursor:pointer;transition:all .2s}
-  .size.active{background:var(--charcoal);color:var(--ivory);border-color:var(--charcoal)}
-  .person{margin-top:24px;border:1px solid var(--line);background:var(--ivory);padding:20px}
-  .person .lab{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-  .person input{width:100%;height:48px;border:1px solid var(--line);background:#fff;padding:0 14px;
-    margin-top:12px;font-family:var(--sans);font-size:15px;outline:none}
-  .person input:focus{border-color:var(--gold)}
-  .preview{margin-top:14px;min-height:110px;background:var(--cream);display:flex;align-items:center;justify-content:center}
-  .preview span{font-family:var(--serif);font-size:36px;font-weight:600;color:var(--gold-deep)}
-  .pdp .addcart{width:100%;justify-content:center;margin-top:22px;padding:18px}
-  .pdp .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border:none;border-top:1px solid var(--line);
-    margin-top:22px;padding-top:20px;text-align:center}
-  .pdp .trust .ti{font-size:11px;color:var(--muted)}
-  .pdp .trust svg{width:20px;height:20px;stroke:var(--gold);stroke-width:1.5;fill:none;margin:0 auto 6px}
-  @media(max-width:900px){.pdp{grid-template-columns:1fr;padding:24px}}
-
-  /* CATEGORY PAGE MOCKUP */
-  .plp{padding:0}
-  .plp-hero{position:relative;height:280px;background-size:cover;background-position:center;display:flex;
-    align-items:center;justify-content:center;text-align:center}
-  .plp-hero .ov{position:absolute;inset:0;background:rgba(43,43,43,.45)}
-  .plp-hero .c{position:relative;color:var(--ivory)}
-  .plp-hero h2{color:var(--ivory);font-size:clamp(2rem,4vw,3rem);text-shadow:0 2px 20px rgba(0,0,0,.4)}
-  .plp-bar{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;border-bottom:1px solid var(--line)}
-  .plp-bar .chips{display:flex;gap:10px;flex-wrap:wrap}
-  .chip{border:1px solid var(--line);padding:7px 16px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-  .chip.active{background:var(--charcoal);color:var(--ivory);border-color:var(--charcoal)}
-  .plp-body{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:32px}
-  .filters .fg{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:20px}
-  .filters .fg .ft{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
-  .filters .fg label{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);padding:4px 0;cursor:pointer}
-  .filters .fg label .bx{width:16px;height:16px;border:1px solid var(--taupe)}
-  .filters .colors{display:flex;gap:10px;flex-wrap:wrap}
-  .filters .colors .c{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);cursor:pointer}
-  @media(max-width:900px){.plp-body{grid-template-columns:1fr}.filters{display:none}}
-
-  /* CART MOCKUP */
-  .cart-mock{display:grid;grid-template-columns:1fr 360px;gap:48px;padding:40px}
-  .cart-item{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--line)}
-  .cart-item .thumb{width:90px;height:110px;background-size:cover;background-position:center;border:1px solid var(--line);flex-shrink:0}
-  .cart-item .cd{flex:1}
-  .cart-item h3{font-size:18px;font-weight:500}
-  .cart-item .v{font-size:13px;color:var(--muted);margin-top:4px}
-  .cart-item .qty{display:inline-flex;border:1px solid var(--line);margin-top:14px}
-  .cart-item .qty button{width:32px;height:32px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--charcoal)}
-  .cart-item .qty span{width:36px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
-  .cart-sum{background:var(--cream);border:1px solid var(--line);padding:28px;height:fit-content}
-  .cart-sum h2{font-size:22px;margin-bottom:20px}
-  .cart-sum .ln{display:flex;justify-content:space-between;font-size:14px;padding:6px 0;color:var(--muted)}
-  .cart-sum .tot{display:flex;justify-content:space-between;font-size:18px;font-weight:500;color:var(--charcoal);
-    border-top:1px solid var(--line);margin-top:14px;padding-top:16px}
-  .cart-sum .ship-bar{height:6px;background:var(--line);margin:16px 0;border-radius:3px;overflow:hidden}
-  .cart-sum .ship-bar i{display:block;height:100%;width:78%;background:var(--gold)}
-  @media(max-width:900px){.cart-mock{grid-template-columns:1fr;padding:24px}}
-
-  /* MOBILE MOCKUP */
-  .phones{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
-  .phone{width:300px;border:10px solid var(--charcoal);border-radius:40px;overflow:hidden;background:var(--ivory);
-    box-shadow:0 30px 60px rgba(43,43,43,.18)}
-  .phone .scr{height:560px;overflow-y:auto;scrollbar-width:none}
-  .phone .scr::-webkit-scrollbar{display:none}
-  .ph-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
-  .ph-head .mn{font-family:var(--serif);font-size:18px;font-weight:600}
-  .ph-head svg{width:18px;height:18px;stroke:var(--charcoal);stroke-width:1.5;fill:none}
-  .ph-hero{height:300px;background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end}
-  .ph-hero .ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(43,43,43,.6))}
-  .ph-hero .c{position:relative;padding:20px;color:var(--ivory)}
-  .ph-hero h2{color:var(--ivory);font-size:26px}
-  .ph-hero .b{display:inline-block;margin-top:12px;background:var(--gold);color:#fff;font-size:11px;
-    letter-spacing:.1em;text-transform:uppercase;padding:10px 18px}
-  .ph-prods{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px}
-  .ph-card .im{aspect-ratio:4/5;background-size:cover;background-position:center;border:1px solid var(--line)}
-  .ph-card .nm{font-family:var(--serif);font-size:15px;margin-top:8px}
-  .ph-card .pr{font-size:13px;color:var(--charcoal);margin-top:2px}
-  .ph-sticky{position:sticky;bottom:0;background:rgba(250,247,242,.96);backdrop-filter:blur(6px);
-    border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:12px 16px}
-  .ph-sticky .pp{font-size:17px;font-weight:500}
-  .ph-sticky .ab{background:var(--gold);color:#fff;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px}
-  .ph-opts{padding:16px}
-  .ph-opts .sw-row{display:flex;gap:8px;margin-top:8px}
-  .ph-opts .sw-row .s{width:30px;height:30px;border-radius:50%;border:1px solid var(--line)}
-  .ph-opts .s.active{box-shadow:0 0 0 2px var(--gold),0 0 0 4px var(--ivory)}
-  .ph-prev{background:var(--cream);min-height:80px;display:flex;align-items:center;justify-content:center;margin-top:14px}
-  .ph-prev span{font-family:var(--serif);font-size:26px;color:var(--gold-deep)}
-
   /* reveal */
   .reveal{opacity:0;transform:translateY(28px);transition:all .9s cubic-bezier(.22,1,.36,1)}
   .reveal.in{opacity:1;transform:none}
 
-  /* ============ PAGE MOCK INTERACTIVE STATES ============ */
-  /* (header/footer/drawer/search/toast styles now live in assets/site.css) */
-  .catgrid a,.cat,.ev,.biz-card,.card,.chip,.filters label,.filters .colors .c,
-  .cart-item .qty button,.sublinks a,.arrow{cursor:pointer}
-  .chip{user-select:none}
-  .filters .fg label .bx.on{background:var(--gold);border-color:var(--gold);position:relative}
-  .filters .fg label .bx.on::after{content:"";position:absolute;left:4px;top:1px;width:5px;height:9px;
-    border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
-  .filters .colors .c.on{box-shadow:0 0 0 2px var(--gold),0 0 0 4px var(--ivory)}
+  /* ============ INTERACTIVE STATES ============ */
+  /* (header/footer/drawer/search/toast styles live in assets/site.css) */
+  .catgrid a,.cat,.ev,.biz-card,.card,.sublinks a,.arrow{cursor:pointer}
 </style>
 </head>
 <body>
@@ -609,7 +489,7 @@
         <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="t">Preview</div><div class="c">See it rendered live</div></div>
         <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div><div class="t">Free proof</div><div class="c">Approve before we make</div></div>
       </div>
-      <a class="btn btn-primary" href="#product">Start Designing</a>
+      <a class="btn btn-primary" href="product.html">Start Designing</a>
     </div>
     <div class="dyo-preview reveal">
       <div class="bg" role="img" aria-label="Live preview of a custom acrylic place name design" style="background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=900&q=80')"></div>
@@ -658,194 +538,6 @@
       <a><div class="bg" role="img" aria-label="Personalized event décor and table numbers" style="background-image:url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"><span>View story →</span></div></a>
       <a><div class="bg" role="img" aria-label="Personalized engraved keepsake gift detail" style="background-image:url('https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=600&q=80')"></div><div class="ov"><span>View story →</span></div></a>
     </div>
-  </div>
-</section>
-
-<!-- ============ PRODUCT PAGE MOCKUP ============ -->
-<div class="wrap mock-label" id="product"><span class="tag">Product Page</span></div>
-<div class="wrap"><div class="mock-frame">
-  <div class="pdp">
-    <div class="gallery">
-      <div class="main" role="img" aria-label="Gold-edge personalized acrylic wedding table numbers" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=80')"><span class="badge">Bestseller</span></div>
-      <div class="thumbs">
-        <div class="active" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=200&q=80')"></div>
-        <div style="background-image:url('https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=200&q=80')"></div>
-        <div style="background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=200&q=80')"></div>
-        <div style="background-image:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=200&q=80')"></div>
-        <div style="background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=200&q=80')"></div>
-      </div>
-    </div>
-    <div class="buy">
-      <h2>Gold-Edge Acrylic Table Numbers</h2>
-      <div class="rate"><span class="s">★</span> 4.8 <span class="lk">(318 reviews)</span></div>
-      <div class="price"><span class="now">$48</span><span class="old">$60</span><span class="save">Save 20%</span></div>
-
-      <div class="opt">
-        <div class="lab">Material — <span id="matName">Acrylic</span></div>
-        <div class="swatches" id="matSw">
-          <div class="sw active" style="background:#EBD9D2" data-n="Acrylic"></div>
-          <div class="sw" style="background:#C9B79C" data-n="Oak"></div>
-          <div class="sw" style="background:#6B4A2B" data-n="Walnut"></div>
-          <div class="sw" style="background:#9C8B73" data-n="MDF"></div>
-        </div>
-      </div>
-
-      <div class="opt">
-        <div class="lab">Finish — <span id="finName">Gold Mirror</span></div>
-        <div class="swatches" id="finSw">
-          <div class="sw active" style="background:#B8975A" data-n="Gold Mirror"></div>
-          <div class="sw" style="background:#2B2B2B" data-n="Charcoal"></div>
-          <div class="sw" style="background:#F3EEE5" data-n="Frosted"></div>
-          <div class="sw" style="background:#EBD9D2" data-n="Blush"></div>
-        </div>
-      </div>
-
-      <div class="opt">
-        <div class="lab">Size</div>
-        <div class="sizes" id="sizes">
-          <div class="size">Small 3"</div>
-          <div class="size active">Medium 4"</div>
-          <div class="size">Large 5"</div>
-        </div>
-      </div>
-
-      <div class="person">
-        <div class="lab">Personalize</div>
-        <input id="pdpInput" value="Emma & James" maxlength="22" />
-        <div class="preview"><span id="pdpPrev">Emma &amp; James</span></div>
-      </div>
-
-      <a class="btn btn-primary addcart">Add to Cart — $48</a>
-
-      <div class="trust">
-        <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z"/></svg><div class="ti">Secure payment</div></div>
-        <div><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div class="ti">Free design proof</div></div>
-        <div><svg viewBox="0 0 24 24"><path d="M14 2 4 12l4 4L18 6z"/><path d="m18 6 2 2-3 3-2-2z"/></svg><div class="ti">Own production</div></div>
-      </div>
-    </div>
-  </div>
-</div></div>
-
-<!-- ============ CATEGORY PAGE MOCKUP ============ -->
-<div class="wrap mock-label" id="shop"><span class="tag">Category Page</span></div>
-<div class="wrap"><div class="mock-frame plp">
-  <div class="plp-hero" role="img" aria-label="Personalized wedding table numbers collection banner" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=2000&q=80')">
-    <div class="ov"></div>
-    <div class="c"><p class="overline" style="color:var(--gold)">The Wedding Collection</p><h2>Table Numbers</h2></div>
-  </div>
-  <div class="plp-bar">
-    <div class="chips">
-      <div class="chip active">All</div><div class="chip">Rustic</div><div class="chip">Modern</div><div class="chip">Luxe</div><div class="chip">Minimal</div>
-    </div>
-    <div style="font-size:13px;color:var(--muted)">18 pieces · Sort: Popular</div>
-  </div>
-  <div class="plp-body">
-    <aside class="filters">
-      <div class="fg">
-        <div class="ft">Material</div>
-        <label><span class="bx"></span>Acrylic</label>
-        <label><span class="bx"></span>Wood</label>
-        <label><span class="bx"></span>MDF</label>
-        <label><span class="bx"></span>Plywood</label>
-      </div>
-      <div class="fg">
-        <div class="ft">Finish</div>
-        <div class="colors">
-          <div class="c" style="background:#B8975A"></div><div class="c" style="background:#2B2B2B"></div>
-          <div class="c" style="background:#F3EEE5"></div><div class="c" style="background:#EBD9D2"></div>
-          <div class="c" style="background:#C9B79C"></div>
-        </div>
-      </div>
-      <div class="fg" style="border:none">
-        <div class="ft">Turnaround</div>
-        <label><span class="bx"></span>Rush (1–2 days)</label>
-        <label><span class="bx"></span>3–5 days</label>
-      </div>
-    </aside>
-    <div class="prods" id="plpProds" style="grid-template-columns:repeat(3,1fr)"></div>
-  </div>
-</div></div>
-
-<!-- ============ CART MOCKUP ============ -->
-<div class="wrap mock-label" id="cart"><span class="tag">Cart</span></div>
-<div class="wrap"><div class="mock-frame">
-  <div class="cart-mock">
-    <div>
-      <h2 style="font-size:28px;margin-bottom:8px">Your Cart</h2>
-      <p style="font-size:14px;color:var(--muted);margin-bottom:20px">2 items</p>
-      <div class="cart-item" data-unit="48">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=200&q=80')"></div>
-        <div class="cd">
-          <h3>Gold-Edge Acrylic Table Numbers</h3>
-          <div class="v">Acrylic · Gold Mirror · 1–20</div>
-          <div class="qty"><button type="button">−</button><span>2</span><button type="button">+</button></div>
-        </div>
-        <div class="line" style="font-weight:500">$96</div>
-      </div>
-      <div class="cart-item" data-unit="95">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=200&q=80')"></div>
-        <div class="cd">
-          <h3>Arched Acrylic Welcome Sign</h3>
-          <div class="v">Acrylic · "Emma & James"</div>
-          <div class="qty"><button type="button">−</button><span>1</span><button type="button">+</button></div>
-        </div>
-        <div class="line" style="font-weight:500">$95</div>
-      </div>
-    </div>
-    <div class="cart-sum">
-      <h2>Order Summary</h2>
-      <div style="font-size:13px;color:var(--muted)" id="cShip">Add $14 more for complimentary shipping</div>
-      <div class="ship-bar"><i id="cBar"></i></div>
-      <div class="ln"><span>Subtotal</span><span id="cSub">$191</span></div>
-      <div class="ln"><span>Member discount</span><span style="color:var(--gold-deep)">−$10</span></div>
-      <div class="ln"><span>Shipping</span><span>Calculated</span></div>
-      <div class="tot"><span>Total</span><span id="cTot">$181</span></div>
-      <a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px">Checkout</a>
-      <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px">Free design proof before production</div>
-    </div>
-  </div>
-</div></div>
-
-<!-- ============ MOBILE MOCKUP ============ -->
-<div class="wrap mock-label"><span class="tag">Mobile Responsive</span></div>
-<section class="section" style="padding-top:32px">
-  <div class="wrap phones">
-    <!-- Phone 1: Home -->
-    <div class="phone"><div class="scr">
-      <div class="ph-head">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        <span class="mn">HoneyWoodLand</span>
-        <svg viewBox="0 0 24 24"><path d="M6 7h12l-1.5 12.5a1 1 0 0 1-1 .9H8.5a1 1 0 0 1-1-.9L6 7z"/></svg>
-      </div>
-      <div class="ph-hero" style="background-image:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80')">
-        <div class="ov"></div>
-        <div class="c"><p class="overline" style="color:var(--gold)">Bespoke Décor</p><h2>Details to remember</h2><span class="b">Shop Weddings</span></div>
-      </div>
-      <div class="ph-prods">
-        <div class="ph-card"><div class="im" style="background-image:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=300&q=80')"></div><div class="nm">Seating Chart</div><div class="pr">$128</div></div>
-        <div class="ph-card"><div class="im" style="background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=300&q=80')"></div><div class="nm">Place Names</div><div class="pr">$4.50</div></div>
-        <div class="ph-card"><div class="im" style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=300&q=80')"></div><div class="nm">Table Numbers</div><div class="pr">$48</div></div>
-        <div class="ph-card"><div class="im" style="background-image:url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=300&q=80')"></div><div class="nm">Welcome Sign</div><div class="pr">$95</div></div>
-      </div>
-    </div></div>
-    <!-- Phone 2: Product -->
-    <div class="phone"><div class="scr">
-      <div class="ph-head">
-        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-        <span class="mn">Table Numbers</span>
-        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5 6 5c2 0 3.2 1.3 4 2.5C10.8 6.3 12 5 14 5c3.5 0 5 4 3.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg>
-      </div>
-      <div style="aspect-ratio:4/5;background-size:cover;background-position:center;background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=400&q=80')"></div>
-      <div class="ph-opts">
-        <h2 style="font-size:22px">Gold-Edge Table Numbers</h2>
-        <div style="font-size:13px;color:var(--gold);margin-top:4px">★ 4.8 (318)</div>
-        <div style="font-size:22px;font-weight:500;margin-top:8px">$48 <span style="color:var(--taupe);text-decoration:line-through;font-size:15px">$60</span></div>
-        <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:16px">Finish</div>
-        <div class="sw-row"><div class="s active" style="background:#B8975A"></div><div class="s" style="background:#2B2B2B"></div><div class="s" style="background:#F3EEE5"></div><div class="s" style="background:#EBD9D2"></div></div>
-        <div class="ph-prev"><span>Emma &amp; James</span></div>
-      </div>
-      <div class="ph-sticky"><span class="pp">$48</span><span class="ab">Add to Cart</span></div>
-    </div></div>
   </div>
 </section>
 
@@ -914,7 +606,6 @@
   }
   document.getElementById('bestsellers').innerHTML = best.map(card).join('');
   document.getElementById('newarrivals').innerHTML = fresh.map(card).join('');
-  document.getElementById('plpProds').innerHTML = [...best,...fresh.slice(0,2)].map(card).join('');
 
   /* reviews */
   const revs=[
@@ -950,39 +641,9 @@
   /* FAQ */
   document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
 
-  /* PDP swatches + size */
-  function bindSwatch(id,nameId){
-    const wrap=document.getElementById(id);
-    wrap.querySelectorAll('.sw').forEach(s=>s.addEventListener('click',()=>{
-      wrap.querySelector('.active').classList.remove('active');s.classList.add('active');
-      document.getElementById(nameId).textContent=s.dataset.n;
-      updatePrev();
-    }));
-  }
-  bindSwatch('matSw','matName');bindSwatch('finSw','finName');
-  document.querySelectorAll('#sizes .size').forEach(s=>s.addEventListener('click',()=>{
-    document.querySelector('#sizes .active').classList.remove('active');s.classList.add('active');
-  }));
-  const pInput=document.getElementById('pdpInput'),pPrev=document.getElementById('pdpPrev');
-  function updatePrev(){
-    pPrev.textContent=pInput.value||"Your text";
-    const fin=document.getElementById('finName').textContent;
-    const map={'Gold Mirror':'#B8975A','Charcoal':'#2B2B2B','Frosted':'#9C7D44','Blush':'#9C7D44'};
-    pPrev.style.color=map[fin]||'#9C7D44';
-  }
-  pInput.addEventListener('input',updatePrev);
-
-  /* DYO live name from PDP input too (delight) */
-  pInput.addEventListener('input',()=>{document.getElementById('dyoName').textContent=pInput.value||"Your Name";});
-
-  /* cart / wishlist interactions
-     (toast, addToCart, drawer, search, wishlist toggle now live in assets/site.js) */
-  const _ac=document.querySelector('.addcart');
-  if(_ac)_ac.addEventListener('click',e=>{e.preventDefault();window.addToCart(1);});
-  document.querySelectorAll('.ph-sticky .ab').forEach(b=>b.addEventListener('click',()=>window.addToCart(1)));
-
-  /* product cards: heart = wishlist (card body links to product.html) */
-  ['bestsellers','newarrivals','plpProds'].forEach(id=>{
+  /* product cards: heart = wishlist (card body links to product.html;
+     toast/addToCart live in assets/site.js) */
+  ['bestsellers','newarrivals'].forEach(id=>{
     const grid=document.getElementById(id);if(!grid)return;
     grid.addEventListener('click',e=>{
       const fav=e.target.closest('.fav');
@@ -991,39 +652,6 @@
     });
   });
 
-  /* ---------- cart-mock quantity steppers ---------- */
-  const FREE_SHIP=150,MEMBER_DISC=10;
-  const cSub=document.getElementById('cSub'),cTot=document.getElementById('cTot'),
-        cShip=document.getElementById('cShip'),cBar=document.getElementById('cBar');
-  function recalcCart(){
-    let sub=0;
-    document.querySelectorAll('.cart-item').forEach(it=>{
-      const unit=+it.dataset.unit||0,q=+it.querySelector('.qty span').textContent;
-      const line=unit*q;sub+=line;it.querySelector('.line').textContent='$'+line;
-    });
-    const tot=Math.max(0,sub-MEMBER_DISC);
-    cSub.textContent='$'+sub;cTot.textContent='$'+tot;
-    const remain=FREE_SHIP-sub;
-    cShip.textContent=remain>0?`Add $${remain} more for complimentary shipping`:'You’ve unlocked complimentary shipping';
-    cBar.style.width=Math.min(100,Math.round(sub/FREE_SHIP*100))+'%';
-  }
-  document.querySelectorAll('.cart-item .qty').forEach(q=>{
-    const span=q.querySelector('span'),btns=q.querySelectorAll('button');
-    btns[0].addEventListener('click',()=>{span.textContent=Math.max(1,(+span.textContent)-1);recalcCart();});
-    btns[1].addEventListener('click',()=>{span.textContent=(+span.textContent)+1;recalcCart();});
-  });
-  recalcCart();
-
-  /* ---------- PLP mock: chips, filters ---------- */
-  document.querySelectorAll('.plp-bar .chips .chip').forEach(c=>c.addEventListener('click',()=>{
-    const cur=document.querySelector('.plp-bar .chips .chip.active');
-    if(cur)cur.classList.remove('active');c.classList.add('active');
-  }));
-  document.querySelectorAll('.filters .fg label').forEach(l=>{
-    const bx=l.querySelector('.bx');
-    if(bx)l.addEventListener('click',()=>bx.classList.toggle('on'));
-  });
-  document.querySelectorAll('.filters .colors .c').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('on')));
 </script>
 </body>
 </html>
