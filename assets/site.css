@@ -55,14 +55,14 @@ header{position:sticky;top:0;z-index:100;background:var(--ivory);border-bottom:1
   transition:border-color .3s,background .3s}
 header.scrolled{border-color:var(--line);background:rgba(250,247,242,.96);backdrop-filter:blur(8px)}
 /* 3-column grid: [left menu] [center logo] [right icons] — logo never overlaps */
-.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:56px;height:68px}
-.nav-links{display:flex;gap:28px;align-items:center;justify-self:start;min-width:0}
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:72px;height:68px}
+.nav-links{display:flex;gap:28px;align-items:center;justify-self:start;min-width:0;padding-right:24px}
 .nav-links a{font-size:13px;letter-spacing:.08em;text-transform:uppercase;transition:color .3s;white-space:nowrap}
 .nav-links a:hover{color:var(--gold-deep)}
-.logo{justify-self:center;text-align:center;white-space:nowrap;padding:0 32px}
+.logo{justify-self:center;text-align:center;white-space:nowrap;padding:0 64px}
 .logo .name{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.02em;display:block;line-height:1}
 .logo .tag{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-top:2px}
-.nav-icons{display:flex;gap:20px;align-items:center;justify-self:end}
+.nav-icons{display:flex;gap:20px;align-items:center;justify-self:end;padding-left:24px}
 .nav-icons svg{width:20px;height:20px;stroke:var(--charcoal);stroke-width:1.4;fill:none;cursor:pointer;transition:stroke .3s}
 .nav-icons a{cursor:pointer;display:inline-flex}
 .nav-icons a:hover svg{stroke:var(--gold-deep)}
@@ -75,10 +75,14 @@ header.scrolled{border-color:var(--line);background:rgba(250,247,242,.96);backdr
 .burger{display:none;cursor:pointer;justify-self:start}
 .burger svg{width:24px;height:24px;stroke:var(--charcoal);stroke-width:1.4;fill:none}
 /* tighten spacing before the inline menu can crowd the logo */
-@media(max-width:1200px){
+@media(max-width:1280px){
+  .nav{gap:48px}
+  .logo{padding:0 40px}
+}
+@media(max-width:1100px){
   .nav{gap:28px}
-  .logo{padding:0 16px}
-  .nav-links{gap:18px}
+  .logo{padding:0 24px}
+  .nav-links{gap:16px}
   .nav-links a{font-size:12px;letter-spacing:.05em}
 }
 /* mobile: hide inline menu, show burger + drawer; logo stays centered */
